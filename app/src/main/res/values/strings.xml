@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GERT</string>
+    <string name="action_settings">Settings</string>
+    <string name="txt_user">ชื่อผู้ใช้ : </string>
+    <string name="txt_pass">รหัสผ่าน : </string>
+    <string name="txt_btn_login">เข้าสู่ระบบ</string>
+    <string name="txt_btn_logout">ออกจากระบบ</string>
+</resources>
