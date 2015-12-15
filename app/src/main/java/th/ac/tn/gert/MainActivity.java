@@ -177,7 +177,7 @@ public class MainActivity extends Activity {
 
                         // Launch main activity
                         Intent intent = new Intent(MainActivity.this,
-                                AppActivity.class);
+                                Tab1Activity.class);
                         startActivity(intent);
                         finish();
                     } else {
