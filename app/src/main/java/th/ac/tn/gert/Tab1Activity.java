@@ -118,9 +118,5 @@ public class Tab1Activity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-    
-    @Override
-    public int onStartCommand(Intent intent,int flags,int startId){
-        return START_STICKY;
-    }
+
 }
