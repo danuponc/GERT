@@ -7,9 +7,9 @@
     <LinearLayout
     android:orientation="vertical"
     android:layout_width="0dp"
+        android:padding="12dp"
         android:layout_weight="0.3"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/colorBg3"
+        android:background="@color/colorBg1"
     android:layout_height="match_parent">
 
         <ImageView
@@ -18,16 +18,77 @@
             android:id="@+id/imageView2"
             android:textAlignment="center"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="22dp"
-            android:src="@drawable/pic13" />
+            android:layout_marginTop="20dp"
+            android:src="@drawable/android1"
+            android:padding="5dp"
+            android:background="@color/colorBg6" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="pName"
+            android:id="@+id/pName" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="pAge"
+            android:id="@+id/pAge" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="pWeight"
+            android:id="@+id/pWeight" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="pHeight"
+            android:id="@+id/pHeight" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="pOccupation"
+            android:id="@+id/pOccupation" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="pAddress"
+            android:id="@+id/pAddress" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_154"
+            android:textAlignment="center"
+            android:layout_marginTop="45dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/imageView4" />
+        <Button
+        android:layout_width="wrap_content"
+            android:layout_marginTop="15dp"
+        android:layout_height="wrap_content"
+        android:text="ออกจากระบบ" android:layout_gravity="center_horizontal"
+        android:id="@+id/btnLogout" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="0dp"
-        android:background="@color/colorBg4"
+        android:background="@color/colorWhite"
         android:layout_weight="0.7"
         android:layout_height="match_parent">
 
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView5"
+            android:src="@drawable/logo2"
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 </LinearLayout>

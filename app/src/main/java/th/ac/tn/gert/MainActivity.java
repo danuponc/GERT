@@ -1,6 +1,7 @@
 package th.ac.tn.gert;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.Request.Method;
@@ -42,7 +44,7 @@ import th.ac.tn.gert.SessionManager;
 
 public class MainActivity extends Activity {
     private static final String TAG = MainActivity.class.getSimpleName();
-    private Button btnLogin;
+    private ImageButton btnLogin;
     private EditText inputUsername;
     private EditText inputPassword;
     private ProgressDialog pDialog;
@@ -70,7 +72,8 @@ public class MainActivity extends Activity {
 
         inputUsername = (EditText) findViewById(R.id.userName);
         inputPassword = (EditText) findViewById(R.id.passWord);
-        btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnLogin = (ImageButton) findViewById(R.id.btnLogin);
+        btnLogin.setBackgroundColor(Color.TRANSPARENT);
 
         //Progress dialog
         pDialog = new ProgressDialog(this);
@@ -84,7 +87,7 @@ public class MainActivity extends Activity {
 
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
-            Intent intent = new Intent(MainActivity.this, AppActivity.class);
+            Intent intent = new Intent(MainActivity.this, Tab1Activity.class);
             startActivity(intent);
             finish();
         }
@@ -98,7 +101,7 @@ public class MainActivity extends Activity {
                 String password = inputPassword.getText().toString().trim();
 
                 // Check for empty data in the form
-                if (!username.isEmpty() && !password.isEmpty()) {
+                if (!username.isEmpty()) {
                     // login user
                     checkLogin(username, password);
                 } else {
@@ -146,7 +149,7 @@ public class MainActivity extends Activity {
         showDialog();
 
         StringRequest strReq = new StringRequest(Method.POST,
-                AppConfig.URL_LOGIN, new Response.Listener<String>() {
+                AppConfig.URL_LOGIN_TMP+"?user="+email+"&pass="+password, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -169,16 +172,34 @@ public class MainActivity extends Activity {
                         JSONObject user = jObj.getJSONObject("user");
                         String name = user.getString("name");
                         String email = user.getString("email");
+
+                        // For GERT
+                        String profile_picture = jObj.getString("profilePicture");
+                        String id_number = jObj.getString("age");
+                        String dob = jObj.getString("dateOfBirth");
+                        String gender = jObj.getString("gender");
+                        String nationality = jObj.getString("nationality");
+                        String occupation = jObj.getString("occupation");
+                        String height = jObj.getString("height");
+                        String weight = jObj.getString("weight");
+                        String disease = jObj.getString("disease");
+                        String alcohol = jObj.getString("alcohol");
+                        String smoke = jObj.getString("smoke");
+                        String phone_number = jObj.getString("phoneNumber");
+                        String mobile_phone = jObj.getString("mobilePhone");
+                        String address = jObj.getString("address");
+
                         String created_at = user
                                 .getString("created_at");
 
                         // Inserting row in users table
-                        db.addUser(name, email, uid, created_at);
+                        db.addUser(name, email, uid, profile_picture ,id_number ,dob ,gender ,nationality ,occupation ,height ,weight ,disease ,alcohol ,smoke ,phone_number ,mobile_phone ,address ,created_at);
 
                         // Launch main activity
                         Intent intent = new Intent(MainActivity.this,
                                 Tab1Activity.class);
                         startActivity(intent);
+                        MainActivity.this.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.fade_out);
                         finish();
                     } else {
                         // Error in login. Get the error message

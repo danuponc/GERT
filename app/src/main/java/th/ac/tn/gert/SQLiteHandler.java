@@ -30,6 +30,23 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final String KEY_NAME = "name";
     private static final String KEY_EMAIL = "email";
     private static final String KEY_UID = "uid";
+
+    // For GERT Application
+    private static final String PROFILE_PICTURE = "profile_picture";
+    private static final String ID_NUMBER = "id_number";
+    private static final String DOB = "dob";
+    private static final String GENDER = "gender";
+    private static final String NATIONALITY = "nationality";
+    private static final String OCCUPATION = "occupation";
+    private static final String HEIGHT = "height";
+    private static final String WEIGHT = "weight";
+    private static final String DISEASE = "disease";
+    private static final String ALCOHOL = "alcohol";
+    private static final String SMOKE = "smoke";
+    private static final String PHONE_NUMBER = "phone_number";
+    private static final String MOBILE_PHONE = "mobile_phone";
+    private static final String ADDRESS = "address";
+
     private static final String KEY_CREATED_AT = "created_at";
 
     public SQLiteHandler(Context context) {
@@ -42,6 +59,13 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_USER + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
                 + KEY_EMAIL + " TEXT UNIQUE," + KEY_UID + " TEXT,"
+                + PROFILE_PICTURE + " TEXT," + ID_NUMBER + " TEXT,"
+                + DOB + " TEXT," + GENDER + " TEXT,"
+                + NATIONALITY + " TEXT," + OCCUPATION + " TEXT,"
+                + HEIGHT + " TEXT," + WEIGHT + " TEXT,"
+                + DISEASE + " TEXT," + ALCOHOL + " TEXT,"
+                + SMOKE + " TEXT," + PHONE_NUMBER + " TEXT,"
+                + MOBILE_PHONE + " TEXT," + ADDRESS + " TEXT,"
                 + KEY_CREATED_AT + " TEXT" + ")";
         db.execSQL(CREATE_LOGIN_TABLE);
 
@@ -61,7 +85,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     /**
      * Storing user details in database
      * */
-    public void addUser(String name, String email, String uid, String created_at) {
+    public void addUser(String name, String email, String uid, String profile_picture,String id_number ,
+            String dob,String gender,String nationality,String occupation,String height,String weight,String disease,String alcohol,String smoke,String phone_number,String mobile_phone,String address,String created_at) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -69,6 +94,21 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_EMAIL, email); // Email
         values.put(KEY_UID, uid); // Email
         values.put(KEY_CREATED_AT, created_at); // Created At
+        //For GERT
+        values.put(PROFILE_PICTURE, profile_picture);
+        values.put(ID_NUMBER, id_number);
+        values.put(DOB, dob);
+        values.put(GENDER, gender);
+        values.put(NATIONALITY, nationality);
+        values.put(OCCUPATION, occupation);
+        values.put(HEIGHT, height);
+        values.put(WEIGHT, weight);
+        values.put(DISEASE, disease);
+        values.put(ALCOHOL, alcohol);
+        values.put(SMOKE, smoke);
+        values.put(PHONE_NUMBER, phone_number);
+        values.put(MOBILE_PHONE, mobile_phone);
+        values.put(ADDRESS, address);
 
         // Inserting Row
         long id = db.insert(TABLE_USER, null, values);
@@ -92,6 +132,23 @@ public class SQLiteHandler extends SQLiteOpenHelper {
             user.put("name", cursor.getString(1));
             user.put("email", cursor.getString(2));
             user.put("uid", cursor.getString(3));
+
+            // For GERT
+            user.put("profile_picture", cursor.getString(4));
+            user.put("id_number", cursor.getString(5));
+            user.put("dob", cursor.getString(6));
+            user.put("gender", cursor.getString(7));
+            user.put("nationality", cursor.getString(8));
+            user.put("occupation", cursor.getString(9));
+            user.put("height", cursor.getString(10));
+            user.put("weight", cursor.getString(11));
+            user.put("disease", cursor.getString(12));
+            user.put("alcohol", cursor.getString(13));
+            user.put("smoke", cursor.getString(14));
+            user.put("phone_number", cursor.getString(15));
+            user.put("mobile_phone", cursor.getString(16));
+            user.put("address", cursor.getString(17));
+
             user.put("created_at", cursor.getString(4));
         }
         cursor.close();

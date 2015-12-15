@@ -5,4 +5,5 @@ package th.ac.tn.gert;
  */
 public class AppConfig {
     public static String URL_LOGIN = "http://www.danupon.net/tn4/api/login.json";
+    public static String URL_LOGIN_TMP = "http://www.danupon.net/tn4/api/login2.php";
 }
