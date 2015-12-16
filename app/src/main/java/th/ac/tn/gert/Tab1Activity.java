@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -80,7 +81,7 @@ public class Tab1Activity extends AppCompatActivity {
         List<AppointData> appoint_data = db.getAllAppoint();
 
         // Get Image
-        String url = "http://www.danupon.net/tn4/images/personal/"+user.get("uid")+".jpg";
+        String url = "http://www.tn.ac.th/health/images/personal/"+user.get("uid")+".jpg";
         new DownloadImageTask((ImageView)findViewById(R.id.imageView2)).execute(url);
 
         String name = "ชื่อ : "+user.get("name");
@@ -110,11 +111,14 @@ public class Tab1Activity extends AppCompatActivity {
                 //appoint_data.get(i);
 
                 TextView tv_subject = new TextView(this);
+                tv_subject.setTextColor(Color.BLUE);
+                tv_subject.setTextSize(22);
                 TextView tv_ap_date = new TextView(this);
                 TextView tv_ap_time = new TextView(this);
                 TextView tv_ap_detail = new TextView(this);
                 TextView tv_admin = new TextView(this);
                 TextView blank = new TextView(this);
+                TextView blank_line = new TextView(this);
 
                 tv_subject.setText(a.getApSubject());
                 tv_ap_date.setText(a.getApDate());
@@ -122,13 +126,15 @@ public class Tab1Activity extends AppCompatActivity {
                 tv_ap_detail.setText(a.getApDetail());
                 tv_admin.setText(a.getAdminName());
                 blank.setText("");
+                blank_line.setText("___________________________________________________");
 
                 ou.addView(tv_subject);
                 ou.addView(tv_ap_date);
                 ou.addView(tv_ap_time);
                 ou.addView(tv_ap_detail);
                 ou.addView(tv_admin);
-                ou.addView(blank);
+
+                ou.addView(blank_line);ou.addView(blank);
             }
         }
 
