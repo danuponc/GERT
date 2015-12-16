@@ -30,6 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -172,6 +173,25 @@ public class MainActivity extends Activity {
                         JSONObject user = jObj.getJSONObject("user");
                         String name = user.getString("name");
                         String email = user.getString("email");
+
+                        // For GERT appoint
+                        //JSONObject ap = jObj.getJSONObject("apObject");
+                        JSONArray ap = jObj.getJSONArray("apObject");
+                        Log.d(TAG, "-----------------------"+String.valueOf(ap.length()));
+
+                        for(int i=0;i<ap.length();i++){
+                            JSONObject rec = ap.getJSONObject(i);
+                            String ap_id = rec.getString("apId");
+                            String ap_personal_id = rec.getString("apPersonalId");
+                            String ap_date = rec.getString("apAppointDate");
+                            String ap_time = rec.getString("apAppointTime");
+                            String ap_subject = rec.getString("apAppointSubject");
+                            String ap_detail = rec.getString("apAppointDetail");
+                            String admin_name = rec.getString("adminName");
+                            //Log.d(TAG, "+++ " + i + " : ");
+
+                            db.addAppoint(ap_id,ap_personal_id,ap_date,ap_time,ap_subject,ap_detail,admin_name);
+                        }
 
                         // For GERT
                         String profile_picture = jObj.getString("profilePicture");

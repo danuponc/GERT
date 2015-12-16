@@ -90,5 +90,21 @@
             android:id="@+id/imageView5"
             android:src="@drawable/logo2"
             android:layout_gravity="center_horizontal" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorWhite"
+            android:id="@+id/layout_x"
+            android:padding="18dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="26dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="แจ้งเตือนการนัดหมาย"
+                android:id="@+id/textView3" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

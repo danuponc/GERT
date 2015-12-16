@@ -7,7 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by danupon on 13/12/2558.
@@ -56,6 +58,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // Table user
         String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_USER + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
                 + KEY_EMAIL + " TEXT UNIQUE," + KEY_UID + " TEXT,"
@@ -69,7 +72,16 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 + KEY_CREATED_AT + " TEXT" + ")";
         db.execSQL(CREATE_LOGIN_TABLE);
 
-        Log.d(TAG, "Database tables created");
+        // Table appoint
+        String CREATE_APPOINT_TABLE = "CREATE TABLE appoint ("+
+                "id INTEGER PRIMARY KEY, ap_id TEXT,"+
+                "ap_personal_id TEXT, ap_date TEXT, ap_time TEXT,"+
+                "ap_subject TEXT, ap_detail TEXT, admin_name TEXT)";
+        db.execSQL(CREATE_APPOINT_TABLE);
+
+
+
+        Log.d(TAG, "Database tables created2");
     }
 
     // Upgrading database
@@ -115,6 +127,21 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
 
         Log.d(TAG, "New user inserted into sqlite: " + id);
+    }
+
+    public void addAppoint(String ap_id,String ap_personal_id, String ap_date, String ap_time,String ap_subject, String ap_detail, String admin_name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues v = new ContentValues();
+        v.put("ap_id",ap_id);
+        v.put("ap_personal_id", ap_personal_id);
+        v.put("ap_date", ap_date);
+        v.put("ap_time", ap_time);
+        v.put("ap_subject", ap_subject);
+        v.put("ap_detail", ap_detail);
+        v.put("admin_name", admin_name);
+        long id = db.insert("appoint",null,v);
+        db.close();
+        Log.d(TAG, "New appoint inserted into sqlite: " + id);
     }
 
     /**
@@ -166,8 +193,30 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         // Delete All Rows
         db.delete(TABLE_USER, null, null);
+        db.delete("appoint", null, null);
         db.close();
 
         Log.d(TAG, "Deleted all user info from sqlite");
     }
+
+    public List<AppointData> getAllAppoint()
+    {
+        List<AppointData> dataList = new ArrayList<AppointData>();
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM appoint", null);
+
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                AppointData data = new AppointData(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7)); dataList.add(data);
+            }
+
+            while (cursor.moveToNext());
+        }
+        return dataList;
+    }
+
+
 }

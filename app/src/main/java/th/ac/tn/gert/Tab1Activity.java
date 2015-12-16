@@ -6,11 +6,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import th.ac.tn.gert.SQLiteHandler;
@@ -23,6 +25,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Tab1Activity extends AppCompatActivity {
@@ -74,6 +77,7 @@ public class Tab1Activity extends AppCompatActivity {
 
         // Fetching user details from sqlite
         HashMap<String, String> user = db.getUserDetails();
+        List<AppointData> appoint_data = db.getAllAppoint();
 
         // Get Image
         String url = "http://www.danupon.net/tn4/images/personal/"+user.get("uid")+".jpg";
@@ -96,6 +100,37 @@ public class Tab1Activity extends AppCompatActivity {
         pAddress.setText(address);
 
 
+        // Layout prepare
+        LinearLayout ou = (LinearLayout) findViewById(R.id.layout_x);
+
+
+        // Appoint List
+        if(!(appoint_data == null)) {
+            for (AppointData a : appoint_data) {
+                //appoint_data.get(i);
+
+                TextView tv_subject = new TextView(this);
+                TextView tv_ap_date = new TextView(this);
+                TextView tv_ap_time = new TextView(this);
+                TextView tv_ap_detail = new TextView(this);
+                TextView tv_admin = new TextView(this);
+                TextView blank = new TextView(this);
+
+                tv_subject.setText(a.getApSubject());
+                tv_ap_date.setText(a.getApDate());
+                tv_ap_time.setText(a.getAptime());
+                tv_ap_detail.setText(a.getApDetail());
+                tv_admin.setText(a.getAdminName());
+                blank.setText("");
+
+                ou.addView(tv_subject);
+                ou.addView(tv_ap_date);
+                ou.addView(tv_ap_time);
+                ou.addView(tv_ap_detail);
+                ou.addView(tv_admin);
+                ou.addView(blank);
+            }
+        }
 
         btnLogout = (Button) findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener(){
@@ -106,6 +141,8 @@ public class Tab1Activity extends AppCompatActivity {
                 finish();
             }
         });
+
+        getAppoint();
     }
 
     private void logoutUser() {
@@ -117,6 +154,10 @@ public class Tab1Activity extends AppCompatActivity {
         Intent intent = new Intent(Tab1Activity.this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void getAppoint(){
+
     }
 
 }
